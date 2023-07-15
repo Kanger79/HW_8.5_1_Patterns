@@ -1,10 +1,18 @@
 package ru.netology.data;
 
+import com.github.javafaker.Faker;
+import lombok.Value;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Random;
 
 public class DataGenerator {
+    private  DataGenerator() {
+
+    }
 
     public static int random() { // генерация случайного числа от 3 до 30
         double random = Math.random() * 28;
@@ -24,6 +32,29 @@ public class DataGenerator {
         return cities[new Random().nextInt(cities.length)];
     }
 
-    
+    public static String genName(String locale) {
+        var faker = new Faker(new Locale("ru"));
+        return faker.name().lastName() + " " + faker.name().firstName();
+    }
+
+    public static String genPhone(String locale) {
+        var faker = new Faker(new Locale("ru"));
+        return faker.phoneNumber().phoneNumber();
+    }
+
+    public static class Regisration {
+        private Regisration() {
+        }
+        public static UserInfo genUser(String locale) {
+            return new UserInfo(genCity(), genName(locale), genPhone(locale));
+        }
+    }
+
+    @Value
+    public static class UserInfo {
+        String city;
+        String name;
+        String phone;
+    }
 
 }
