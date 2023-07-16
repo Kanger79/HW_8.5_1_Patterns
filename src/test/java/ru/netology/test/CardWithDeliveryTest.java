@@ -26,7 +26,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    void firstPlanMeetValid() {
+    void shouldPlanAndReplanMeetValid() {
 
         $("[data-test-id='city'] input").setValue(DataGenerator.genCity());
         String firstDate = DataGenerator.genDate(DataGenerator.random(), "dd.MM.yyyy");
